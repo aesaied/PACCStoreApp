@@ -1,0 +1,58 @@
+﻿@using Newtonsoft.Json
+@model CountryViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+
+<a asp-action="Create" a>Create new country</a>
+
+<partial name="_AlertPartial" />
+
+<table class="table table-bordered table-hover table-responsive">
+    <thead>
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(Model=>Model.Countries[-100].Id)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(Model => Model.Countries[-1].Name)
+            </th>
+
+            <th scope="col">
+                Manage
+
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach(var country in Model.Countries)
+        {
+            <tr>
+                <td>
+                    @country.Id
+                </td>
+
+                <td>@country.Name</td>
+
+                <td>
+
+                    @{
+                        var dic = new Dictionary<string, string>();
+                        dic["name"] = country.Name;
+
+                    }
+                    <a asp-action="Edit"  asp-route-name="@country.Name" asp-route-id="@country.Id">Edit</a>
+
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+

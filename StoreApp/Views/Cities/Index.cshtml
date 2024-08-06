@@ -1,0 +1,64 @@
+﻿@using Newtonsoft.Json
+@model CityViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+
+<a asp-action="Create" a>Create new city</a>
+
+<partial name="_AlertPartial" />
+
+<table class="table table-bordered table-hover table-responsive">
+    <thead>
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(Model=>Model.Cities[-100].Id)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(Model => Model.Cities[-1].Name)
+            </th>
+
+            <th scope="col">
+                @Html.DisplayNameFor(Model => Model.Cities[-1].CountryName)
+            </th>
+
+            <th scope="col">
+                Manage
+
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach(var city in Model.Cities)
+        {
+            <tr>
+                <td>
+                    @city.Id
+                </td>
+
+                <td>@city.Name</td>
+
+                <td>@city.CountryName</td>
+
+                <td>
+
+                    @{
+                        var dic = new Dictionary<string, string>();
+                        dic["name"] = city.Name;
+
+                    }
+                    <a asp-action="Edit" asp-route-name="@city.Name" asp-route-id="@city.Id">Edit</a>
+
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+

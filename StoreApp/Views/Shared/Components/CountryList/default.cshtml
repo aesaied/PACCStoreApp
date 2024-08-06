@@ -1,0 +1,10 @@
+﻿@using StoreApp.AppServices.Country.Dtos
+@model List<CountryDto>
+
+
+<ul>
+    @foreach(var  country  in Model)
+    {
+        <li>@country.Name </li>
+    }
+</ul>
