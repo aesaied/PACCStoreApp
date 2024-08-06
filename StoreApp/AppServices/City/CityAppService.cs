@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using StoreApp.AppServices.City.Dtos;
 
@@ -45,16 +46,18 @@ namespace StoreApp.AppServices.City
 
         public async Task<IList<CityDto>> GetAll()
         {
-            var cities = await _db.Cities.Include(s=>s.Country).ToListAsync();
+          //  var cities = await _db.Cities.Include(s=>s.Country).ToListAsync();
+
+           return  await _db.Cities.ProjectTo<CityDto>(_objectMapper.ConfigurationProvider).ToListAsync();
 
 
             //  AutoMapper 
 
-            var output = _objectMapper.Map<List<CityDto>>(cities);
+            //var output = _objectMapper.Map<List<CityDto>>(cities);
 
-            //var output = countries.Select(c => new CountryDto() { Id = c.Id, Name = c.Name });
+            ////var output = countries.Select(c => new CountryDto() { Id = c.Id, Name = c.Name });
 
-            return output.ToList();
+            //return output.ToList();
 
         }
 
