@@ -8,5 +8,14 @@
         public const string ValidNameExpression = @"^[a-zA-Z0-9._\u0600-\u06FF()?//\\@,:!& -]+$";
         public const string ValidGuid = @"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$";
         public const string PhoneNumberExpression = @"^[+\d]+$";
+
+
+        public static class Roles
+        {
+            public const string Admins = "Admins";
+            public const string Manager = "Manager";
+            public const string User = "User";
+
+        }
     }
 }

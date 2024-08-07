@@ -44,20 +44,34 @@ namespace StoreApp.AppServices.City
             return await _db.SaveChangesAsync() == 1;
         }
 
-        public async Task<IList<CityDto>> GetAll()
+        public async Task<IList<CityDto>> GetAll(CityFilterInput input)
         {
-          //  var cities = await _db.Cities.Include(s=>s.Country).ToListAsync();
 
-           return  await _db.Cities.ProjectTo<CityDto>(_objectMapper.ConfigurationProvider).ToListAsync();
+            var data =  _db.Cities.AsQueryable();
 
 
-            //  AutoMapper 
+            if (!string.IsNullOrWhiteSpace(input.Search) && input.CountryId != null && input.CountryId.Any())
+            {
+                data = data.Where(s => (s.Name.Contains(input.Search.Trim()) || input.CountryId.Contains(s.CountryId)));
+                return await data.ProjectTo<CityDto>(_objectMapper.ConfigurationProvider).ToListAsync();
+               
+            }
+            if (!string.IsNullOrWhiteSpace(input.Search))
+            {
+                data = data.Where(s => s.Name.Contains(input.Search.Trim()));
+            }
 
-            //var output = _objectMapper.Map<List<CityDto>>(cities);
+            if (input.CountryId != null  && input.CountryId.Any()) 
+            {
 
-            ////var output = countries.Select(c => new CountryDto() { Id = c.Id, Name = c.Name });
+                // and countyId in (,,,,)
+                data = data.Where(s => input.CountryId.Contains(s.CountryId));
+            }
 
-            //return output.ToList();
+            return await data.ProjectTo<CityDto>(_objectMapper.ConfigurationProvider).ToListAsync();
+
+
+
 
         }
 

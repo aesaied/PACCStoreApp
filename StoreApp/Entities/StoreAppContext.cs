@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+
 using StoreApp.Entities.Extensions;
 
 namespace StoreApp.Entities
 {
-    public class StoreAppContext : DbContext
+    public class StoreAppContext : IdentityDbContext<AppStoreUser, AppStoreRole,int>
     {
 
 
@@ -22,7 +24,6 @@ namespace StoreApp.Entities
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
 
             modelBuilder.ConfigureCountry();
             modelBuilder.ConfigureCity();

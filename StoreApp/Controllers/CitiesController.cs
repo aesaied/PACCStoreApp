@@ -18,11 +18,13 @@ namespace StoreApp.Controllers
             _cityAppService = cityAppService;
             _countryAppService = countryAppService;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(CityFilterInput input)
         {
-            var data = await _cityAppService.GetAll();
+            var data = await _cityAppService.GetAll(input);
 
-            var model = new CityViewModel() { Cities = data };
+            var model = new CityViewModel() { Cities = data, Filter=input };
+
+            await FillLookups();
             return View(model);
         }
 

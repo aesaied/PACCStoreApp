@@ -18,10 +18,13 @@
 
     <div class="mb-3">
         <label  asp-for="CountryId"  class="form-label"></label>
-        <select  asp-for="CountryId" asp-items='ViewData["CountryList"] as SelectList' class="form-select">
-            <option selected>Choose...</option>
+        <select  asp-for="CountryId" asp-items='ViewBag.CountryList as SelectList' class="form-select">
+            <option value="" selected>Choose...</option>
            
         </select>
+
+        <span asp-validation-for="CountryId" class="text-danger"></span>
+
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>

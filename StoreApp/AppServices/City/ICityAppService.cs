@@ -6,7 +6,7 @@ namespace StoreApp.AppServices.City
     {
         Task<bool> Create(CreateCityDto input);
         Task<bool> Edit(CreateCityDto input);
-        Task<IList<CityDto>> GetAll();
+        Task<IList<CityDto>> GetAll(CityFilterInput input);
         Task<CreateCityDto> GetCityForEdit(int id);
         Task<List<CityDto>> GetTopCities(int rows);
     }

@@ -8,5 +8,7 @@ namespace StoreApp.Models
 
 
         public required IList<CityDto> Cities { get; set; }
+
+        public required CityFilterInput Filter { get; set; }
     }
 }
